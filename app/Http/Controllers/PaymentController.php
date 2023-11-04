@@ -8,15 +8,17 @@ use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {
+    public function __construct(protected PaymentService $service)
+    {
 
+    }
 
     /**
      * @throws Exception
      */
     public function payment(): string
     {
-        $paymentService = new PaymentService();
-        $payment = $paymentService->initializePayment('stripe');
-        return $payment->makePayment();
+        $paymentService = $this->service->initializePayment('paypal');
+        return $paymentService->makePayment();
     }
 }
