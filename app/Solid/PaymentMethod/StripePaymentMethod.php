@@ -5,7 +5,7 @@ namespace App\Solid\PaymentMethod;
 class StripePaymentMethod implements PaymentMethodInterface
 {
 
-    public function makePayment(): string
+    public function makePayment()
     {
         return 'Stripe payment';
     }

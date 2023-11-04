@@ -2,14 +2,25 @@
 
 namespace App\Solid;
 
-use App\Solid\PaymentMethod\PaymentMethodInterface;
+
+use App\Solid\PaymentMethod\PaypalPaymentMethod;
+use App\Solid\PaymentMethod\StripePaymentMethod;
+use Exception;
 
 class PaymentService
 {
-
-    public function pay(PaymentMethodInterface $paymentMethod)
+    /**
+     * @throws Exception
+     */
+    public function initializePayment(string $type): StripePaymentMethod|PaypalPaymentMethod
     {
-        return $paymentMethod->makePayment();
+        if ($type === 'stripe') {
+            return new StripePaymentMethod;
+        } else if ($type === 'paypal') {
+            return new PaypalPaymentMethod();
+        }
+
+        throw new Exception('Unsupported payment method');
     }
 
 

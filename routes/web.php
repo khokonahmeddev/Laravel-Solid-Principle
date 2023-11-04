@@ -24,7 +24,5 @@ Route::get('users-reports', function () {
     return $pdfExport->export($saleReports->between('1-10-2023', '2-10-2023'));
 });
 
-Route::get('payment', function (){
 
-    return (new \App\Solid\PaymentService)->pay(new \App\Solid\PaymentMethod\StripePaymentMethod());
-});
+Route::get('payment', [\App\Http\Controllers\PaymentController::class, 'payment']);
